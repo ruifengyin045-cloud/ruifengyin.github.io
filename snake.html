@@ -2,47 +2,66 @@
 <html lang="zh">
 <head>
 <meta charset="UTF-8">
-<title>手机版贪吃蛇</title>
+<title>终极贪吃蛇</title>
 <style>
-body {
-  text-align: center;
-  background: #ffe6f0;
-  font-family: Arial;
+body{
+  margin:0;
+  background: radial-gradient(circle,#0f2027,#203a43,#2c5364);
+  color:#00ffcc;
+  text-align:center;
+  font-family:Arial;
 }
 
-h1 {
-  color: #ff69b4;
+h1{
+  text-shadow:0 0 10px #00ffcc;
 }
 
-canvas {
-  background: #fff;
-  border: 2px solid pink;
+canvas{
+  background:#000;
+  box-shadow:0 0 20px #00ffcc;
+  border-radius:10px;
+  margin-top:10px;
 }
 
-.controls button {
-  margin: 5px;
-  padding: 10px 15px;
-  font-size: 20px;
-  border: none;
-  border-radius: 10px;
-  background: pink;
+button{
+  margin:5px;
+  padding:10px 20px;
+  font-size:16px;
+  border:none;
+  border-radius:8px;
+  background:#00ffcc;
 }
 
-#score {
-  font-size: 20px;
-  margin: 10px;
+.panel{
+  margin-top:10px;
+}
+
+.controls{
+  margin-top:10px;
+}
+
+.controls button{
+  font-size:20px;
 }
 </style>
 </head>
 
 <body>
 
-<h1>🐍 贪吃蛇</h1>
-<div id="score">得分：0</div>
+<h1>🐍 终极贪吃蛇</h1>
+
+<div class="panel">
+  得分：<span id="score">0</span> |
+  最高分：<span id="best">0</span>
+</div>
 
 <canvas id="game" width="300" height="300"></canvas>
 
-<!-- 手机控制 -->
+<div>
+  <button onclick="startGame()">开始</button>
+  <button onclick="pauseGame()">暂停</button>
+</div>
+
 <div class="controls">
   <button onclick="setDir(0,-10)">⬆️</button><br>
   <button onclick="setDir(-10,0)">⬅️</button>
@@ -50,6 +69,133 @@ canvas {
   <button onclick="setDir(0,10)">⬇️</button>
 </div>
 
-<script src="snake.js"></script>
+<script>
+const canvas = document.getElementById("game");
+const ctx = canvas.getContext("2d");
+
+let grid = 10;
+let snake, dx, dy, food, score, best=0;
+let running=false;
+let timer;
+
+best = localStorage.getItem("best") || 0;
+document.getElementById("best").innerText = best;
+
+function init(){
+  snake = [{x:150,y:150}];
+  dx = grid;
+  dy = 0;
+  food = randomFood();
+  score = 0;
+  updateScore();
+}
+
+function randomFood(){
+  return {
+    x: Math.floor(Math.random()*30)*grid,
+    y: Math.floor(Math.random()*30)*grid
+  };
+}
+
+function startGame(){
+  init();
+  running=true;
+  clearInterval(timer);
+  timer = setInterval(game,120);
+}
+
+function pauseGame(){
+  running=false;
+}
+
+function setDir(x,y){
+  dx=x; dy=y;
+}
+
+document.addEventListener("keydown",e=>{
+  if(e.key==="ArrowUp") setDir(0,-grid);
+  if(e.key==="ArrowDown") setDir(0,grid);
+  if(e.key==="ArrowLeft") setDir(-grid,0);
+  if(e.key==="ArrowRight") setDir(grid,0);
+});
+
+// 滑动控制
+let sx,sy;
+canvas.addEventListener("touchstart",e=>{
+  sx=e.touches[0].clientX;
+  sy=e.touches[0].clientY;
+});
+canvas.addEventListener("touchend",e=>{
+  let dxs=e.changedTouches[0].clientX-sx;
+  let dys=e.changedTouches[0].clientY-sy;
+
+  if(Math.abs(dxs)>Math.abs(dys)){
+    dxs>0?setDir(grid,0):setDir(-grid,0);
+  }else{
+    dys>0?setDir(0,grid):setDir(0,-grid);
+  }
+});
+
+function game(){
+  if(!running) return;
+
+  ctx.fillStyle="#000";
+  ctx.fillRect(0,0,300,300);
+
+  let head = {x:snake[0].x+dx, y:snake[0].y+dy};
+
+  // 撞墙
+  if(head.x<0||head.x>=300||head.y<0||head.y>=300){
+    return gameOver();
+  }
+
+  // 撞自己
+  for(let s of snake){
+    if(head.x===s.x && head.y===s.y){
+      return gameOver();
+    }
+  }
+
+  snake.unshift(head);
+
+  // 吃食物
+  if(head.x===food.x && head.y===food.y){
+    score++;
+    if(score>best){
+      best=score;
+      localStorage.setItem("best",best);
+    }
+    updateScore();
+    food=randomFood();
+  }else{
+    snake.pop();
+  }
+
+  // 蛇（渐变效果）
+  snake.forEach((s,i)=>{
+    ctx.fillStyle = "hsl("+(i*10)+",100%,50%)";
+    ctx.fillRect(s.x,s.y,grid,grid);
+  });
+
+  // 食物（发光）
+  ctx.fillStyle="red";
+  ctx.shadowBlur=10;
+  ctx.shadowColor="red";
+  ctx.fillRect(food.x,food.y,grid,grid);
+  ctx.shadowBlur=0;
+}
+
+function updateScore(){
+  document.getElementById("score").innerText=score;
+  document.getElementById("best").innerText=best;
+}
+
+function gameOver(){
+  running=false;
+  alert("💀 游戏结束！得分："+score);
+}
+
+</script>
+
 </body>
 </html>
