@@ -1,0 +1,77 @@
+body {
+    margin: 0;
+    font-family: monospace;
+    color: #00ffcc;
+    background: black;
+    overflow-x: hidden;
+}
+
+/* Matrix 背景 */
+canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+/* 标题发光 */
+.glow {
+    text-align: center;
+    font-size: 48px;
+    text-shadow: 0 0 10px #00ffcc, 0 0 20px #00ffcc;
+}
+
+header {
+    text-align: center;
+    padding: 80px 20px;
+}
+
+/* 卡片 */
+.card {
+    margin: 20px auto;
+    padding: 25px;
+    width: 85%;
+    max-width: 600px;
+
+    background: rgba(0,255,204,0.05);
+    border: 1px solid #00ffcc33;
+    border-radius: 10px;
+
+    backdrop-filter: blur(10px);
+    transition: 0.3s;
+}
+
+.card:hover {
+    box-shadow: 0 0 20px #00ffcc;
+    transform: scale(1.02);
+}
+
+/* 项目 */
+.projects {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.proj {
+    padding: 10px;
+    border: 1px solid #00ffcc;
+}
+
+/* 技能条 */
+.bar {
+    background: #222;
+    height: 10px;
+    border-radius: 5px;
+}
+
+.bar div {
+    height: 100%;
+    background: #00ffcc;
+}
+
+/* 页脚 */
+footer {
+    text-align: center;
+    padding: 20px;
+}
