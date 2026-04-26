@@ -1,77 +1,114 @@
 body {
-    margin: 0;
-    font-family: monospace;
-    color: #00ffcc;
-    background: black;
-    overflow-x: hidden;
+  text-align: center;
+  font-family: "Comic Sans MS", "Arial";
+  background: url("https://wallpapers.com/images/featured/hello-kitty-background-0ty9v8m2r9g9g3n4.jpg");
+  background-size: cover;
+  color: #ff69b4;
 }
 
-/* Matrix 背景 */
-canvas {
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: -1;
-}
-
-/* 标题发光 */
-.glow {
-    text-align: center;
-    font-size: 48px;
-    text-shadow: 0 0 10px #00ffcc, 0 0 20px #00ffcc;
-}
-
-header {
-    text-align: center;
-    padding: 80px 20px;
+/* 标题动画 */
+h1 {
+  background: rgba(255,255,255,0.8);
+  display: inline-block;
+  padding: 12px 25px;
+  border-radius: 20px;
+  animation: float 3s infinite ease-in-out;
 }
 
 /* 卡片 */
 .card {
-    margin: 20px auto;
-    padding: 25px;
-    width: 85%;
-    max-width: 600px;
-
-    background: rgba(0,255,204,0.05);
-    border: 1px solid #00ffcc33;
-    border-radius: 10px;
-
-    backdrop-filter: blur(10px);
-    transition: 0.3s;
+  margin: 20px;
+  padding: 20px;
+  background: rgba(255,255,255,0.9);
+  border-radius: 20px;
+  transition: 0.3s;
 }
 
 .card:hover {
-    box-shadow: 0 0 20px #00ffcc;
-    transform: scale(1.02);
+  transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(255,105,180,0.3);
 }
 
-/* 项目 */
-.projects {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
+/* 链接按钮 */
+a {
+  text-decoration: none;
+  color: white;
+  background: #ff69b4;
+  padding: 10px 20px;
+  border-radius: 20px;
+  display: inline-block;
+  transition: 0.3s;
 }
 
-.proj {
-    padding: 10px;
-    border: 1px solid #00ffcc;
+a:hover {
+  transform: scale(1.1);
+  background: #ff1493;
 }
 
-/* 技能条 */
-.bar {
-    background: #222;
-    height: 10px;
-    border-radius: 5px;
+/* 食物 */
+.foods {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
-.bar div {
-    height: 100%;
-    background: #00ffcc;
+.foods div {
+  margin: 15px;
+  cursor: pointer;
+  transition: 0.3s;
 }
 
-/* 页脚 */
-footer {
-    text-align: center;
-    padding: 20px;
+.foods div:hover {
+  transform: scale(1.1) rotate(-2deg);
+}
+
+.foods img {
+  width: 150px;
+  height: 100px;
+  border-radius: 15px;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+}
+
+/* 弹窗 */
+.popup {
+  display: none;
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.5);
+  background: white;
+  padding: 25px;
+  border-radius: 20px;
+  transition: 0.3s;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+/* 弹窗显示动画 */
+.popup.show {
+  display: block;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+/* 按钮 */
+button {
+  margin: 10px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px;
+  background: #ff69b4;
+  color: white;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+button:hover {
+  transform: scale(1.15);
+  background: #ff1493;
+}
+
+/* 漂浮动画 */
+@keyframes float {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+  100% { transform: translateY(0); }
 }
