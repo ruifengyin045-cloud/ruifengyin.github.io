@@ -2,52 +2,28 @@
 <html lang="zh">
 <head>
 <meta charset="UTF-8">
-<title>今日菜单</title>
+<title>食谱</title>
 <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<h1>🍱 今日菜单 🍱</h1>
+<h1>🍱 今日菜单</h1>
 
 <div class="foods">
-
-<div onclick="chooseFood('西红柿炒鸡蛋')">
-<img src="https://images.unsplash.com/photo-1604908176997-125f25cc6f3d">
-<p>西红柿炒鸡蛋</p>
+<div onclick="chooseFood('西红柿炒鸡蛋')"><p>西红柿炒鸡蛋</p></div>
+<div onclick="chooseFood('辣椒炒肉')"><p>辣椒炒肉</p></div>
+<div onclick="chooseFood('红烧肉')"><p>红烧肉</p></div>
+<div onclick="chooseFood('麻婆豆腐')"><p>麻婆豆腐</p></div>
+<div onclick="chooseFood('宫保鸡丁')"><p>宫保鸡丁</p></div>
 </div>
 
-<div onclick="chooseFood('辣椒炒肉')">
-<img src="https://images.unsplash.com/photo-1625944525903-c6c1b3b95a0f">
-<p>辣椒炒肉</p>
-</div>
-
-<div onclick="chooseFood('红烧肉')">
-<img src="https://images.unsplash.com/photo-1604908177225-36efc59e6c4b">
-<p>红烧肉</p>
-</div>
-
-<div onclick="chooseFood('麻婆豆腐')">
-<img src="https://images.unsplash.com/photo-1625944525677-8c8b1b9bd501">
-<p>麻婆豆腐</p>
-</div>
-
-<div onclick="chooseFood('宫保鸡丁')">
-<img src="https://images.unsplash.com/photo-1625944525599-0c2c0e4d7c64">
-<p>宫保鸡丁</p>
-</div>
-
-</div>
-
-<!-- 🌸 可爱弹窗 -->
 <div id="popup" class="popup">
-  <p id="text"></p>
-
-  <button onclick="continueChoose()">🍓 继续选</button>
-  <button onclick="finish()">🍰 够吃啦</button>
+<p id="text"></p>
+<button onclick="continueChoose()">继续选</button>
+<button onclick="finish()">够吃啦</button>
 </div>
 
 <script src="script.js"></script>
-
 </body>
 </html>
