@@ -1,14 +1,54 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh">
 <head>
 <meta charset="UTF-8">
-<title>贪吃蛇</title>
-<link rel="stylesheet" href="style.css">
+<title>手机版贪吃蛇</title>
+<style>
+body {
+  text-align: center;
+  background: #ffe6f0;
+  font-family: Arial;
+}
+
+h1 {
+  color: #ff69b4;
+}
+
+canvas {
+  background: #fff;
+  border: 2px solid pink;
+}
+
+.controls button {
+  margin: 5px;
+  padding: 10px 15px;
+  font-size: 20px;
+  border: none;
+  border-radius: 10px;
+  background: pink;
+}
+
+#score {
+  font-size: 20px;
+  margin: 10px;
+}
+</style>
 </head>
+
 <body>
 
 <h1>🐍 贪吃蛇</h1>
-<canvas id="game" width="400" height="400"></canvas>
+<div id="score">得分：0</div>
+
+<canvas id="game" width="300" height="300"></canvas>
+
+<!-- 手机控制 -->
+<div class="controls">
+  <button onclick="setDir(0,-10)">⬆️</button><br>
+  <button onclick="setDir(-10,0)">⬅️</button>
+  <button onclick="setDir(10,0)">➡️</button><br>
+  <button onclick="setDir(0,10)">⬇️</button>
+</div>
 
 <script src="snake.js"></script>
 </body>
