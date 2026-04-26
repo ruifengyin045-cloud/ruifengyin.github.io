@@ -1,18 +1,13 @@
-function chooseFood(name) {
-  const popup = document.getElementById("popup");
-  const text = document.getElementById("text");
-
-  text.innerText = "你选了 " + name + " 🍱\n帆帆还想吃什么？";
-
-  popup.classList.add("show");
+function chooseFood(name){
+  document.getElementById("popup").style.display="block";
+  document.getElementById("text").innerText="你选了 "+name+"，帆帆还想吃什么？";
 }
 
-function continueChoose() {
-  document.getElementById("popup").classList.remove("show");
+function continueChoose(){
+  document.getElementById("popup").style.display="none";
 }
 
-function finish() {
-  const text = document.getElementById("text");
-  text.innerText = "好嘞，开吃啦！😋💗";
+function finish(){
+  document.getElementById("text").innerText="开吃啦！😋";
 }
 		
